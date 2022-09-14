@@ -1,0 +1,49 @@
+{% extends 'templates/base/index.html' %}
+{% block contenido %}
+    <br><br>
+    <div class="col-md-8" style="border-radius: 1em; background-color:  #292b2c; margin: 0 auto;">
+    {% csrf_token %}
+    {% if pokemon %}
+        <div class="col-md-12 container-fluid" style="border-radius: 1em; background-color: #d9534f; text-align: center">
+            <img height="200" src="{{ pokemon.imagen.dream_world.front_default }}" style="padding-top: 2%"><br><br>
+            <h3 style="color: white; text-transform: capitalize">{{ pokemon.nombre }}</h3><br>
+        </div>
+        <div class="row" style="padding-right: 2%; padding-left: 2%; text-align: center; color: white">
+            <div class="col-md-12"><br>
+                <h3>Datos generales</h3><hr>
+                <div class="container-fluid col-md-10 form-control" style="background-color: #ececec"><br>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 style="color: #df0000">Peso</h4>
+                            <h3 style="text-transform: capitalize">{{ pokemon.peso }}</h3><br>
+                            <h4 style="color: #df0000">Altura</h4>
+                            <h3 style="text-transform: capitalize">{{ pokemon.altura }}</h3><br>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 style="color: #df0000">Habilidad(es)</h4>
+                            {% for habilidad in habilidad %}
+                            <h3 style="text-transform: capitalize">{{ habilidad.ability.name }}</h3>
+                            {% endfor %}<br>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 style="color: #df0000">Tipo(s)</h4>
+                                {% for pokemonS in pokemonS %}
+                                    <h3 style="text-transform: capitalize;"><a href="{% url 'tipo' pokemonS.id %}" style="text-decoration: none; color: black">{{ pokemonS.nombre }}</a></h3>
+                                {% endfor %}
+                        </div>
+                    </div>
+                </div><br>
+                <h3>Lista de movimientos</h3><hr>
+                <div class="row">
+                    {% for movimiento in movimiento %}
+                        <div class="col-md-4">
+                            <h3 style="text-transform: capitalize">{{ movimiento.move.name }}</h3>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div><br>
+    {% else %}
+    {% endif %}
+    </div><br><br>
+{% endblock %}

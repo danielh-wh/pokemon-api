@@ -1,0 +1,42 @@
+{% extends 'templates/base/index.html' %}
+{% block contenido %}
+    <div class="container col-md-10" style="padding-top: 3%; padding-bottom: 3%">
+
+    <div>
+        <div class="row">
+            <div class="col-md-10">
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-success form-control" href="{% url 'tipos_pokemon' %}">Filtrar</a>
+            </div>
+        </div>
+    </div><br>
+
+    {% csrf_token %}
+    {% if pokemonS %}
+        <div class="row g-3">
+        {% for pokemonS in pokemonS %}
+        <div class="col-sm-4" style="text-align: center;">
+            <div class="card">
+                <div class="card-body">
+                    <img height="180" src="{{ pokemonS.imagen.dream_world.front_default }}" class="rounded mx-auto d-block">
+                    <h5 class="card-title" style="text-transform: capitalize">{{ pokemonS.nombre }}</h5>
+                    <a href="{% url 'informacion_pokemon' pokemonS.id %}" class="btn btn-danger">Descripción</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    {% endif %}<br>
+    <div class="row">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-dark form-control" href="{% url 'listar_pokemon' %}?previus={{ previus }}">Anterior</a>
+        </div>
+        <div class="col-md-2">
+            <a class="btn btn-dark form-control" href="{% url 'listar_pokemon' %}?next={{ next }}">Siguiente</a>
+        </div>
+    </div>
+    </div>
+    {% endblock %}

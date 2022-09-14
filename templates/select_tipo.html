@@ -1,0 +1,14 @@
+{% extends 'templates/base/index.html' %}
+
+{% block contenido %}
+<div class="container col-md-10" style="padding-top: 3%; padding-bottom: 3%">
+    <h3>Seleccione un tipo de pokemon</h3><br>
+    <div class="row g-3">
+        {% for pokemonS in pokemonS %}
+            <div class="col-sm-4" style="text-align: center;">
+                <a href="{% url 'tipo' pokemonS.id %}" class="btn btn-success form-control" style="text-transform: capitalize">{{ pokemonS.tipo }}</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
